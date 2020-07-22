@@ -240,12 +240,6 @@ window.addEventListener('DOMContentLoaded', () => {
             `;
             form.insertAdjacentElement('afterend', statusMessage);
 
-            const reqest = new XMLHttpRequest();
-            reqest.open('POST', 'server.php');
-
-            reqest.setRequestHeader('Content-type', 'application/json');
-
-
             const formData = new FormData(form);
 
             const object = {};
@@ -253,20 +247,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-            reqest.send(json);
-
-            reqest.addEventListener('load', () => {
-                if (reqest.status === 200) {
-                    console.log(reqest.response);
+            fetch('server.php', {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(object)
+                }).then(data => data.text())
+                .then(data => {
+                    console.log(data);
                     showThanksModal(message.succes);
-                    form.reset();
                     statusMessage.remove();
-                } else {
+                }).catch(() => {
                     showThanksModal(message.failure);
-                }
-            });
-
+                }).finally(() => {
+                    form.reset();
+                });
         });
     }
 
@@ -294,4 +290,5 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }, 4000);
     }
+
 });
