@@ -339,6 +339,10 @@ window.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 1;
     let offset = 0;
 
+    function deliteeNotDigits(str) {
+        return +str.replace(/\D/g, '');
+    }
+
     function dotOpacity() {
         dots.forEach(dot => dot.style.opacity = '.5');
         dots[slideIndex - 1].style.opacity = 1;
@@ -378,10 +382,10 @@ window.addEventListener('DOMContentLoaded', () => {
         dots.push(dot);
     }
     const moveSlideBlock = setInterval(function () {
-            if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+            if (offset == deliteeNotDigits(width) * (slides.length - 1)) {
                 offset = 0;
             } else {
-                offset += +width.slice(0, width.length - 2);
+                offset += deliteeNotDigits(width);
             }
             slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -400,14 +404,11 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         3000);
 
-    function deliteeNotDigits(str) {
-        str.replace(/\D/g, '');
-    }
     next.addEventListener('click', () => {
-        if (offset == deliteeNotDigits(+width) * (slides.length - 1)) {
+        if (offset == deliteeNotDigits(width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += deliteeNotDigits(+width);
+            offset += deliteeNotDigits(width);
         }
         slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -429,9 +430,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     prev.addEventListener('click', () => {
         if (offset == 0) {
-            offset = deliteeNotDigits(+width) * (slides.length - 1);
+            offset = deliteeNotDigits(width) * (slides.length - 1);
         } else {
-            offset -= deliteeNotDigits(+width);
+            offset -= deliteeNotDigits(width);
         }
         if (slideIndex == 1) {
             slideIndex = slides.length;
