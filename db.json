@@ -1,6 +1,5 @@
 {
-  "menu": [
-    {
+  "menu": [{
       "img": "img/tabs/vegy.jpg",
       "altimg": "vegy",
       "title": "Меню 'Фитнес'",
@@ -22,11 +21,5 @@
       "price": 21
     }
   ],
-  "requests": [
-    {
-      "name": "just flow",
-      "phone": "5555555555555555555",
-      "id": 1
-    }
-  ]
+  "requests": []
 }
