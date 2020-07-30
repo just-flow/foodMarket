@@ -17,6 +17,9 @@
   ],
   "author": "Valerii Rb",
   "license": "ISC",
+  "browserslist": [
+    ">1%"
+  ],
   "bugs": {
     "url": "https://github.com/just-flow/foodMarket/issues"
   },
